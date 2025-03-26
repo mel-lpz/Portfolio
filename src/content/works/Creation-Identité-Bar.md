@@ -2,7 +2,7 @@
 title: "Création Identité d'un bar"
 description: "Projet de création de l'identité graphique d'un bar fictif"
 pubDate: 'Mars 18 2025'
-heroImage: '/ParadoxeCover.jpg'
+heroImage: '/Portfolio/ParadoxeCover.jpg'
 auteur: "Mel"
 ---
 
