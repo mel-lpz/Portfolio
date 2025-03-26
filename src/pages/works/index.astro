@@ -1,0 +1,41 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import BasicLayout from '../../layouts/BasicLayout.astro';
+
+const works = (await getCollection('works')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BasicLayout>
+    <section class="max-w-6xl mx-auto px-6 mt-12">
+        <ul class="grid gap-12 md:grid-cols-1 lg:grid-cols-2">
+            {
+                works.map((work) => (
+                    <li class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                        <a href={`/works/${work.id}/`} class="block">
+                            <img 
+                                class="w-full h-72 object-cover rounded-md" 
+                                width={1280} 
+                                height={720} 
+                                src={work.data.heroImage} 
+                                alt={work.data.title} 
+                            />
+                            <h4 class="text-2xl font-semibold text-white mt-6">{work.data.title}</h4>
+                            <p class="text-gray-400 text-base mt-2">
+                                <FormattedDate date={work.data.pubDate} />
+                            </p>
+                            <p class="text-gray-300 mt-4 text-lg">{work.data.description}</p>
+                            <p class="text-gray-500 text-base mt-3">{work.data.auteur}</p>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </section>
+</BasicLayout>
