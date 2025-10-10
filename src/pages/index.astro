@@ -1,11 +1,125 @@
 ---
-import BasicLayout from "../layouts/BasicLayout.astro"
+import BasicLayout from "../layouts/BasicLayout.astro";
+
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const works = (await getCollection('works')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
 ---
 
 <BasicLayout>
+
+<section class="w-full h-screen bg-gradient-to-br from-[var(--color-bg-dark)] via-[#1a0033] to-[#000014] text-[var(--color-fg-main)] flex flex-col items-center justify-center px-4 relative overflow-hidden">
+  
+  <!-- Orbes animées -->
+  <div class="absolute top-10 left-10 w-4 h-4 bg-[var(--color-accent-soft)] rounded-full blur-md opacity-70 animate-pulse"></div>
+  <div class="absolute bottom-12 right-24 w-5 h-5 bg-[var(--color-fg-light)] rounded-full blur-md opacity-60 animate-ping"></div>
+
+  <!-- Avatar -->
+  <div class="bg-gradient-to-br from-[var(--color-accent-soft)] to-[var(--color-warn)] p-6 rounded-[40px] border-2 border-[var(--color-border)] shadow-xl shadow-[var(--color-accent)]/40 w-[280px] text-center mb-8">
+    <div class="w-full h-40 bg-[var(--color-fg-main)]/10 rounded-[30px] flex items-center justify-center text-sm text-white/60 italic">
+      [ mettre photo plus tard ]
+    </div>
+    <div class="mt-4 text-sm text-[var(--color-fg-main)] tracking-wide">
+      &gt; Player_01
+    </div>
+  </div>
+
+  <!-- Présentation -->
+  <h1 class="text-3xl md:text-4xl font-semibold text-[var(--color-font)] mb-2">
+    Salut, moi c’est <span class="text-[var(--color-accent)]">Mel</span>
+  </h1>
+  <p class="text-center max-w-xl text-[var(--color-font)] text-lg leading-relaxed opacity-80">
+    Étudiant MMI – Création. Passionné par l’illustration, les jeux vidéos et l’envers du décor.
+  </p>
+
+  <!-- Intérêts -->
+  <div class="flex gap-6 mt-6 text-xl font-medium tracking-wide">
+    <span class="text-[var(--color-highlight)]">Illustration</span>
+    <span class="text-[var(--color-fg-light)]">Communication</span>
+    <span class="text-[var(--color-warn)]">Montage</span>
+  </div>
+
+  <!-- Boutons -->
+  <div class="flex gap-4 mt-8">
+    <button class="px-6 py-3 bg-gradient-to-r from-[var(--color-accent-soft)] to-[var(--color-accent)] text-[var(--color-bg-dark)] font-semibold rounded-full shadow-lg shadow-[var(--color-accent-soft)]/30 hover:scale-105 transition transform duration-300">
+      🎨 Voir mes projets
+    </button>
+    <button class="px-6 py-3 border border-[var(--color-highlight)] text-[var(--color-highlight)] rounded-full hover:bg-[var(--color-highlight)] hover:text-[var(--color-bg-dark)] transition duration-300">
+      📩 Me contacter
+    </button>
+  </div>
+
+  <!-- Scroll -->
+  <div class="absolute bottom-4 text-sm text-[var(--color-fg-light)] animate-bounce">
+    ↓ scroll_down
+  </div>
+
+</section>
+
+<section class="w-full min-h-screen bg-[var(--color-bg-main)] text-[var(--color-fg-main)] flex flex-col md:flex-row items-center justify-center px-8 py-24 gap-16">
+
+  <!-- Texte -->
+  <div class="flex-1 max-w-xl">
+    <h2 class="text-4xl md:text-5xl font-bold mb-8 text-[var(--color-accent)] leading-tight">À propos</h2>
+
+    <p class="text-xl leading-relaxed mb-6 font-medium">
+      Je m'appelle Mel, étudiant en MMI — parcours Création.  
+      J’évolue entre design graphique, illustration, et code.
+    </p>
+
+    <p class="text-lg opacity-90 mb-4">
+      Mon univers, il est hybride : un peu jeu vidéo, un peu Japon.  
+      Je cherche à créer des projets qui parlent autant à l’œil qu’à l’imaginaire.
+    </p>
+
+    <p class="text-lg opacity-90">
+      Ce portfolio, c’est plus qu’un site.  
+      C’est un terrain de jeu pour tester, illustrer et affirmer ce que je deviens.
+    </p>
+  </div>
+
+  <!-- Visuel / Illustration -->
+  <div class="flex-1 bg-[var(--color-fg-light)]/30 rounded-[80px] border-4 border-[var(--color-fg-light)] w-full max-w-[500px] h-[400px] flex items-center justify-center text-[var(--color-fg-main)] text-center text-lg italic shadow-2xl shadow-[var(--color-warn)]/20">
+    dessin-jolie(RVB).png 
+  </div>
+
+</section>
+
+<section class="max-w-6xl mx-auto px-6 mt-12">
+        <ul class="grid gap-12 md:grid-cols-1 lg:grid-cols-2">
+            {
+                works.map((work) => (
+                    <li class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                        <a href={`/Portfolio/works/${work.id}/`} class="block">
+                            <img 
+                                class="w-full h-72 object-cover rounded-md" 
+                                width={1280} 
+                                height={720} 
+                                src={work.data.heroImage} 
+                                alt={work.data.title} 
+                            />
+                            <h4 class="text-2xl font-semibold text-white mt-6">{work.data.title}</h4>
+                            <p class="text-gray-400 text-base mt-2">
+                                <FormattedDate date={work.data.pubDate} />
+                            </p>
+                            <p class="text-gray-300 mt-4 text-lg">{work.data.description}</p>
+                            <p class="text-gray-500 text-base mt-3">{work.data.auteur}</p>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </section>
+
+
+  
 			
 	<div class="flex items-center justify-center text-center bg-gray-800 w-full h-64">
-		<h1 class="text-white text-4xl font-extrabold">MON PORTFOLIO</h1>
+		<h1 class="text-white text-4xl font-extrabold">MON PORTFOLI</h1>
 	</div>
 	
 	<div class="max-w-3xl mx-auto px-6 mt-12 text-gray-800">

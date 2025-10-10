@@ -6,3 +6,42 @@
 
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
+
+@theme {
+  
+  --color-bg-main: var(--clr-blanc-neige);
+  --color-bg-dark: var(--clr-kuro);
+  --color-fg-main: var(--clr-kuro);
+  --color-fg-light: var(--clr-sora);
+  --color-accent: var(--clr-akai);
+  --color-accent-soft: var(--clr-sakura);
+  --color-highlight: var(--clr-midori);
+  --color-warn: var(--clr-momiji);
+  --color-font: var(--clr-blanc-neige);
+  --color-border: var(--clr-blanc-neige);
+  
+}
+
+@layer base {
+
+  :root {
+
+    --clr-sakura: #FBD3E9;      /* Rose pâle */
+    --clr-akai: #D72638;        /* Rouge cerise */
+    --clr-blanc-neige: #FFF9F5; /* Blanc crème */
+    --clr-midori: #A3D9B1;      /* Vert clair */
+    --clr-kuro: #2C2C34;        /* Gris-noir */
+    --clr-sora: #CDE7F0;        /* Bleu ciel */
+    --clr-momiji: #E85A4F;      /* Rouge orangé */
+
+    --clr-bg: var(--clr-kuro);
+  }
+
+  body {
+    background-color: var(--clr-bg);
+    color: var(--clr-blanc-neige);
+    font-family: var(--font-notojp);
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
