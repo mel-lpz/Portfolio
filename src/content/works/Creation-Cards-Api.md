@@ -4,6 +4,9 @@ description: "Création d'une interface utilisateur inspirée de Nintendo, avec 
 pubDate: 'Septembre 17 2025'
 heroImage: '/Portfolio/NintendoSwitchCardsCover.png'
 auteur: "Mel"
+tags:
+  - UI Design
+  - Projet scolaire
 ---
 
 # 🎮 Projet : **Mini Switch Cards – Interface Utilisateur Nintendo**
